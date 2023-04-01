@@ -1,0 +1,40 @@
+body {
+    font-family: monospace;
+}
+
+.title,
+.desc {
+    font-size: 1rem;
+}
+
+.em {
+    font-size: 18px;
+}
+
+.em .p1 {
+    font-size: 1em;
+}
+
+.em .p2 {
+    font-size: 2em;
+}
+
+.em .p3 {
+    font-size: 3em;
+}
+
+.rem {
+    font-size: 100px;
+}
+
+.rem .p1 {
+    font-size: 1rem;
+}
+
+.rem .p2 {
+    font-size: 2rem;
+}
+
+.rem .p3 {
+    font-size: 3rem;
+}

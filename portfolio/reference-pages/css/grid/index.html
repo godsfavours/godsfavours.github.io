@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid Playground</title>
+    <link rel="stylesheet" href="./resources/css/index.css">
+    <link rel="stylesheet" href="../../../index.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="breadcrumb">
+                <li><a href="../../../">Home</a></li>
+                <li><a href="../../">Reference Pages</a></li>
+                <li><a href="../">CSS</a></li>
+                <li><a href="#">Grid</a></li>
+            </ul>
+        </nav>
+        <h1>CSS Grid</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Create a grid container with 3 columns</h2>
+            <div class="grid g1">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+                <div class="grid-item d">D</div>
+            </div>
+        </section>
+        <section>
+            <h2>3-column grid with gaps</h2>
+            <div class="grid g2">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+                <div class="grid-item d">D</div>
+            </div>
+        </section>
+        <section>
+            <h2>Span a grid item across many rows and columns</h2>
+            <div class="grid g3">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+                <div class="grid-item d">D</div>
+                <div class="grid-item e">E</div>
+                <div class="grid-item f">F</div>
+            </div>
+        </section>
+        <section>
+            <h2>Grid Template Areas</h2>
+            <p>Specify the position of grid items in the grid</p>
+            <div class="grid g4">
+                <div class="grid-item header">header</div>
+                <div class="grid-item left">left</div>
+                <div class="grid-item middle">middle</div>
+                <div class="grid-item right">right</div>
+                <div class="grid-item footer">footer</div>
+            </div>
+        </section>
+        <section>
+            <h2>Overlapping Grid Elements</h2>
+            <p>Use z-index to set which grid item appears on top when they overlap</p>
+            <div class="grid g5">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+            </div>
+            <div class="grid g5-1">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+            </div>
+        </section>
+        <section>
+            <h2>Justify Items</h2>
+            <p>Use justify-items on grid containers to position grid items within their columns. This causes the grid
+                item
+                to
+                use up only the space it needs, rather than the default stretching</p>
+            <div class="grid g6">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+            </div>
+        </section>
+        <section>
+            <h2>Justify Content</h2>
+            <p>Use justify-content on grid containers to position the entire grid within the row axis. This is
+                particularly useful/noticable when grid columns don't span the entire width of the grid.</p>
+            <div class="grid g7">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+            </div>
+        </section>
+        <section>
+            <h2>Align Items</h2>
+            <p>Use align-items on grid containers to position grid items within their rows.</p>
+            <div class="grid g8">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+            </div>
+        </section>
+        <section>
+            <h2>Align Content</h2>
+            <p>Use align-content on grid containers to position the entire grid within the column axis.</p>
+            <div class="grid g9">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+            </div>
+        </section>
+        <section>
+            <h2>Justify Self</h2>
+            <p>Similar to justify items, but set on the individual grid item.</p>
+            <div class="grid g10">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+            </div>
+        </section>
+        <section>
+            <h2>Align Self</h2>
+            <p>Similar to align items, but set on the individual grid item.</p>
+            <div class="grid g11">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+            </div>
+        </section>
+        <section>
+            <h2>Grid Auto Rows and Grid Auto Columns</h2>
+            <p>grid-auto-rows and grid-auto-columns define the size of implicitly added rows/columns. CSS automatically
+                (implicitly) adds new rows and/or columns when more grid items are added to the grid than can be fit
+                using the explicitly defined parameters (for example, grid-template-row explicitly defines the grid to
+                have a set number of rows with the given lengths)</p>
+            <p>In the example below, items E and F are implicitly added.</p>
+            <div class="grid g12">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+                <div class="grid-item d">D</div>
+                <div class="grid-item e">E</div>
+                <div class="grid-item f">F</div>
+            </div>
+        </section>
+        <section>
+            <h2>Grid Auto Flow</h2>
+            <p>grid-auto-flow specifies whether implicitly added items are added to rows (left to right, new row if
+                needed) or columns (top to bottom, with a new column if needed). The default grid-auto-flow is row.</p>
+            <div class="grid g13">
+                <div class="grid-item a">A</div>
+                <div class="grid-item b">B</div>
+                <div class="grid-item c">C</div>
+                <div class="grid-item d">D</div>
+                <div class="grid-item e">E</div>
+                <div class="grid-item f">F</div>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>

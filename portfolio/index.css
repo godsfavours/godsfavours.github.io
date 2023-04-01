@@ -1,0 +1,13 @@
+html {
+    font-family: monospace;
+}
+
+.breadcrumb li {
+    display: inline;
+}
+
+.breadcrumb li+li::before {
+    padding: 10px;
+    content: ">";
+    font-size: 16px;
+}
