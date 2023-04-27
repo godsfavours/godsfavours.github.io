@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Reference</title>
+    <link rel="stylesheet" href="../../../index.css">
+    <link rel="stylesheet" href="./resources/prismjs/prism.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="breadcrumb">
+                <li><a href="../../../">Home</a></li>
+                <li><a href="../">Reference Pages</a></li>
+                <li><a href="#">Testing</a></li>
+            </ul>
+        </nav>
+        <h1>Testing Reference</h1>
+
+    </header>
+    <main>
+        <section>
+            <h2>Tools</h2>
+            <ul>
+                <li><a href="./mocha/">Mocha - a testing framework</a></li>
+                <li><a href="https://www.chaijs.com/" target="_blank">Chai - an assertion library</a></li>
+                <li><a href="https://nodejs.org/api/assert.html#assertthrowsfn-error-message" target="_blank">Node.js
+                        assertion library</a></li>
+                <li><a href="https://sinonjs.org/releases/latest/spies/" target="_blank">Sinon.js - a library for spies,
+                        mocks, and fakes</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Test-Driven-Development (TDD)</h2>
+            <p>Programming paradigm where you write test code before implementation code. Follow the Red-Green-Refactor
+                cycle depicted below:</p>
+            <img src="./resources/images/red-green-refactor-tdd.png" alt="a diagram of the red-green-refactor cycle">
+        </section>
+        <section>
+            <h2>Unit, Integration, and End-to-End (E2E) Tests</h2>
+            <p><a href="https://www.twilio.com/blog/unit-integration-end-to-end-testing-difference">Source</a></p>
+            <h3>Unit Tests</h3>
+            <p>Unit tests are your first line of defense against bugs. These tests are meant to run locally and verify
+                the most fundamental bits of logic in your code.</p>
+            <h3>Integration Tests</h3>
+            <p>Integration tests check whether different chunks of code are interacting successfully in a local
+                environment.</p>
+            <h3>E2E Tests</h3>
+            <p>End-to-End tests, or E2E tests, are a way of verifying your code's deployed behavior from a user
+                perspective. You automate a user simulation that interacts with your system as a black box, so all that
+                matters is whether the user's actions correspond to the correct output in a timely manner.</p>
+        </section>
+        <section>
+            <h2>Code Coverage and Test Coverage</h2>
+            <h3>Code Coverage</h3>
+            <p>Code coverage is the metric that measures the amount of application code that has been executed in
+                testing, represented as a percentage. For example, if 90% of our code has been executed in our tests,
+                then we would say that we have “90% code coverage”.</p>
+            <h3>Test Coverage</h3>
+            <p>Test coverage differs from code coverage in that test coverage measures the percentage of the required
+                features/specs that are tested, as opposed to the percentage of lines executed. These features/specs are
+                typically defined in a requirements document provided by a client or product designer.</p>
+        </section>
+        <section>
+            <h2>Mocking</h2>
+            <p>Mocking is the process of creating a fake version of an external service (such as an API or database) for
+                testing purposes. Also referred to as <strong>stubbing</strong>, although there is a <a
+                    href="https://dev.to/snird/the-difference-between-mocks-and-stubs-explained-with-js-kkc"
+                    target="_blank">difference</a>. Mocking is usually done in unit and integration tests.</p>
+            <p>Mocking is encouraged in <strong>unit tests</strong> to limit the potential sources of bugs and to
+                isolate
+                tests.</p>
+
+            <p>Mocking in <strong>integration tests</strong> is only encouraged when working with external services. For
+                internal
+                services, it is encouraged to not mock.</p>
+        </section>
+        <section>
+            <h2>Spies</h2>
+            <p>In testing, a spy is a function that observes and records information about another function's calls
+                including arguments, return value, the this value, and exceptions thrown (if any). Spies can be very
+                useful for checking code coverage.</p>
+            <p>Example usage with <a href="https://sinonjs.org/releases/latest/spies/">Sinon.js</a>:</p>
+            <pre><code class="language-javascript">const robot = {
+greet(name){  // Unit being tested
+    return 'Hello ' + name;
+}
+};
+
+test('greet should return hello codey', () => {
+sinon.spy(robot, 'greet'); // Initialize the spy
+robot.greet('codey'); // Call the method
+expect(robot.greet.called).to.be.true;
+expect(robot.greet.calledWith('codey')).to.be.true;
+expect(robot.greet.returned('Hello codey')).to.be.true;
+robot.greet.restore(); // Remove spy from wrapped method
+});</code></pre>
+        </section>
+    </main>
+    <script src="./resources/prismjs/prism.js"></script>
+</body>
+
+</html>

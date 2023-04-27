@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mocha Reference</title>
+    <link rel="stylesheet" href="../../../../index.css">
+    <link rel="stylesheet" href="./resources/css/index.css">
+    <link rel="stylesheet" href="./resources/prismjs/prism.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="breadcrumb">
+                <li><a href="../../../../">Home</a></li>
+                <li><a href="../../">Reference Pages</a></li>
+                <li><a href="../">Testing</a></li>
+                <li><a href="#">Mocha</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1><a href="https://mochajs.org/" target="_blank">MochaJs</a></h1>
+        <section>
+            <h2>Installing Mocha</h2>
+            <article>
+                <pre><code class="language-bash">$ npm init</code></pre>
+                <p>The command will create package.json, which manages packages for the project.</p>
+            </article>
+            <article>
+                <pre><code class="language-bash">$ npm install mocha -D</code></pre>
+                <p>Tells npm to install the mocha package. <i>-D</i> tag indicates that the package is a development
+                    dependency and will show up under the <strong>devDependencies</strong> section in
+                    <strong>package.json
+                    </strong>-- it will only be available in dev mode, and not prod mode.
+                </p>
+            </article>
+        </section>
+        <section>
+            <h2>Running Mocha</h2>
+            <article>
+                <p>One way is to run mocha directly from node_modules.</p>
+                <pre><code class="language-bash">$ ./node_modules/mocha/bin/mocha</code></pre>
+            </article>
+            <article>
+                <p>Alternatively, and preferably, set "mocha" as the value of the "test" key of "scripts" in
+                    <strong>package.json</strong>
+                </p>
+                <pre><code class="language-javascript">"scripts": { 
+    "test": "mocha test/**/*_test.js"" 
+}</code></pre>
+                <p>Then run the <strong>npm test</strong> command to execute the full test suite. The
+                    <strong>test/**/*_test.js</strong> portion specifies what test files should run (those in the test/
+                    directory ending in _test.js)
+                </p>
+                <pre><code class="language-bash">$ npm test</code></pre>
+            </article>
+        </section>
+        <section>
+            <h2>Describe and it blocks</h2>
+            <p>Group tests using the <strong>describe</strong> function and define tests using the <strong>it</strong>
+                function. For example,</p>
+            <pre><code class="language-javascript">describe('Math', () => {
+    describe('.max', () => {
+        it('returns the argument with the highest value', () => {
+        // Test goes here
+        });
+        it('returns -Infinity when no arguments are provided', () => {
+        // Test goes here
+        });
+    });
+});</code></pre>
+        </section>
+        <section>
+            <h2>assert</h2>
+            <p><a href="https://nodejs.org/api/assert.html" target="_blank">Assert Methods</a></p>
+            <p>The <strong>assert</strong> function allows us to actually validate things in the test. It is a Node
+                package.</p>
+            <p>First, import <strong>assert</strong>: </p>
+            <pre><code class="language-javascript">const assert = require('assert');</code></pre>
+            <p>And then call <strong>assert</strong>: </p>
+            <pre><code class="language-javascript">const answer = 9 * 5;
+assert.ok(answer === 45);</code></pre>
+            <p>If <strong>assert.ok</strong> evaluates to false, an <strong>AssertionError</strong> is thrown which
+                tells Mocha
+                that a test failed.</p>
+        </section>
+        <section>
+            <h2>Setup, Exercise, and Verify</h2>
+            <p>This is the conventional process for writing individual tests, so that they are clean and reliable.</p>
+            <ul>
+                <li><strong>Setup</strong>: In the first lines of the <strong>it</strong> block, define variables and
+                    set
+                    conditions that the test depends on.</li>
+                <li><strong>Exercise</strong>: Then go on to execute the functionality that you are testing.</li>
+                <li><strong>Verify</strong>: Finally, check your expectations against the actual result of the
+                    execution.
+                </li>
+            </ul>
+            <p>An example test case that adheres to this principal:</p>
+            <pre><code class="language-javascript">describe('addNumbers', () => {
+    it ('returns the sum of numbers in an array', () => {
+        // setup
+        const array = [1, 4, 6, 8];
+        const expectedValue = 19;
+
+        // execute
+        const actualValue = addNumbers(array);
+
+        // Verify
+        assert.equal(actualValue, expectedValue);
+    })
+})</code></pre>
+        </section>
+        <section>
+            <h2>Teardown</h2>
+            <p><strong>Teardown</strong> is a step that is very important when working with and writing tests. After the
+                tests have run, it is important to reset the testing environment (globally-scoped variables, or other
+                external entities that the tests alter) to ensure that tests execute in isolation and don't affect one
+                another.</p>
+            <p><strong>Teardown</strong> is achieved through the use of <strong>hooks</strong></p>
+        </section>
+        <section>
+            <h2>Hooks</h2>
+            <p><strong>Hooks</strong> allow for <strong>setup</strong> and <strong>teardown</strong> operations for
+                tests. Within a describe block, use the following hooks:</p>
+            <ul>
+                <li><strong>beforeEach(callback)</strong>: callback is run before each test</li>
+                <li><strong>afterEach(callback)</strong>: callback is run before after test</li>
+                <li><strong>before(callback)</strong>: callback is run before the first test</li>
+                <li><strong>after(callback)</strong>: callback is run after the last test</li>
+            </ul>
+        </section>
+    </main>
+    <script src="./resources/prismjs/prism.js"></script>
+</body>
+
+</html>
