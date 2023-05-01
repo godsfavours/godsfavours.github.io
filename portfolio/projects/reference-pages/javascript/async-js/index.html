@@ -62,9 +62,10 @@
                     This reason is
                     usually an Error of some kind.</li>
             </ul>
-            <h3>Constructing a Promise</h3>
-            <p>Below is how to create a new promise:</p>
-            <pre><code class="language-javascript">const executorFunction = (resolve, reject) => {
+            <article>
+                <h3>Constructing a Promise</h3>
+                <p>Below is how to create a new promise:</p>
+                <pre><code class="language-javascript">const executorFunction = (resolve, reject) => {
     if (someCondition) {
         resolve('I resolved!');
     } else {
@@ -72,30 +73,37 @@
     }
 }
 const myFirstPromise = new Promise(executorFunction);</code></pre>
-            <ul>
-                <li><strong>resolve</strong> is a function with one argument. Under the hood, if invoked, resolve() will
-                    change the promise's
-                    status from pending to fulfilled, and the promise's resolved value will be set to the argument
-                    passed
-                    into resolve().</li>
-                <li><strong>reject</strong> is a function that takes a reason or error as an argument. Under the hood,
-                    if invoked, reject()
-                    will change the promise's status from pending to rejected, and the promises rejection reason will
-                    be
-                    set to the argument passed into reject().</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Consuming Promises</h2>
-            <p>When a promise is no longer pending, we can handle the outcome using the <strong>.then</strong> method on
-                the promise.</p>
-            <pre><code class="language-javascript">myFirstPromise.then(onFulfilled, onRejected);</code></pre>
-            <p><strong>onFulfilled</strong> is the success handler function, which contains logic for handling a
-                successful promise. <strong>onRejected</strong> serves the opposite purpose.
-                <strong>onFulfilled</strong> takes as
-                argument what is passed into <strong>resolve</strong> in the promise, and vise-versa
-            </p>
-            <pre><code class="language-javascript">const onFulfilled = res => {
+                <p>A promise takes in a single <strong>executor function</strong> as input, which takes in two values:
+                    <strong>resolve</strong> and <strong>reject</strong>.
+                </p>
+                <ul>
+                    <li><strong>resolve</strong> is a function with
+                        one argument. Under the hood, if invoked, resolve() will
+                        change the promise's
+                        status from pending to fulfilled, and the promise's resolved value will be set to the argument
+                        passed
+                        into resolve().</li>
+                    <li><strong>reject</strong> is a function that takes a reason or error as an argument. Under the
+                        hood,
+                        if invoked, reject()
+                        will change the promise's status from pending to rejected, and the promises rejection reason
+                        will
+                        be
+                        set to the argument passed into reject().</li>
+                </ul>
+            </article>
+            <article>
+                <h3>Consuming Promises</h3>
+                <p>When a promise is no longer pending, we can handle the outcome using the <strong>.then</strong>
+                    method on
+                    the promise.</p>
+                <pre><code class="language-javascript">myFirstPromise.then(onFulfilled, onRejected);</code></pre>
+                <p><strong>onFulfilled</strong> is the success handler function, which contains logic for handling a
+                    successful promise. <strong>onRejected</strong> serves the opposite purpose.
+                    <strong>onFulfilled</strong> takes as
+                    argument what is passed into <strong>resolve</strong> in the promise, and vise-versa
+                </p>
+                <pre><code class="language-javascript">const onFulfilled = res => {
     // do something with res
 }
 
@@ -103,34 +111,39 @@ const onRejected = rejectionReason => {
     ...
 }
             </code></pre>
-            <p><strong>.then()</strong> will return a promise with the same settled value as the promise it was called
-                on if no appropriate handler was provided. This means that if the promise succeeds but no success
-                handler was provided, <strong>.then()</strong> will just return a promise with the same settled results
-                as the original promise.
-                The same goes if no failure handler is provided.
-            </p>
-            <p>To write cleaner code and achieve <i>separation of concerns</i>, it is common to only include the success
-                handler in the <strong>.then()</strong> method, and then chain a <strong>.catch()</strong> call:</p>
-            <pre><code class="language-javascript">myFirstPromise.then((res) => {
+                <p><strong>.then()</strong> will return a promise with the same settled value as the promise it was
+                    called
+                    on if no appropriate handler was provided. This means that if the promise succeeds but no success
+                    handler was provided, <strong>.then()</strong> will just return a promise with the same settled
+                    results
+                    as the original promise.
+                    The same goes if no failure handler is provided.
+                </p>
+                <p>To write cleaner code and achieve <i>separation of concerns</i>, it is common to only include the
+                    success
+                    handler in the <strong>.then()</strong> method, and then chain a <strong>.catch()</strong> call:</p>
+                <pre><code class="language-javascript">myFirstPromise.then((res) => {
     // onFulfilled function
     ...
 }).catch((error) => {
     // onRejected function
 };)
             </code></pre>
-            <p><strong>.catch()</strong> is equivalent to a <strong>.then()</strong> call without the success callback
-                provided:</p>
-            <pre><code class="language-javascript">myFirstPromise.then((res) => {
+                <p><strong>.catch()</strong> is equivalent to a <strong>.then()</strong> call without the success
+                    callback
+                    provided:</p>
+                <pre><code class="language-javascript">myFirstPromise.then((res) => {
     // onFulfilled function
     ...
 }).then(null, (error) => {
     // onRejected function
 };)</code></pre>
-            <h2>Chaining Promises</h2>
-            <p>It's not uncommon to have to perform a sequence of asynchronous tasks, each depending on the one before
-                it. We can do this by chaining promises together, a process called <i>composition</i>. An example of
-                promise composition is shown below:</p>
-            <pre><code>myFirstPromise.then((firstPromiseResolvedValue) => {
+                <h3>Chaining Promises</h3>
+                <p>It's not uncommon to have to perform a sequence of asynchronous tasks, each depending on the one
+                    before
+                    it. We can do this by chaining promises together, a process called <i>composition</i>. An example of
+                    promise composition is shown below:</p>
+                <pre><code class="language-javascript">myFirstPromise.then((firstPromiseResolvedValue) => {
     return mySecondPromise(secondPromisesolvedValue);
 }).then((secondPromiseResolvedValue) => {
     return myThirdPromise(secondPromisesolvedValue);
@@ -138,8 +151,93 @@ const onRejected = rejectionReason => {
     console.log(thirdPromiseResolvedValue);
 }));
             </code></pre>
-            <p>note that the <strong>return</strong> statement is necessary to pass the next promise through the chain,
-                otherwise the default return value is used.</p>
+                <p>note that the <strong>return</strong> statement is necessary to pass the next promise through the
+                    chain,
+                    otherwise the default return value is used.</p>
+            </article>
+            <article>
+                <h2>Promise.all()</h2>
+                <p>The <strong>Promise.all()</strong> method is used to group a bunch of promises together and perform
+                    some
+                    operation when they are all completed. It takes in an array of promises, and if they all resolve,
+                    Promise.all() will return a single promise that resolves with an array containing the resolve value
+                    for
+                    the initial promises. If any of the initial promises rejects, <strong>Promise.all()</strong> will
+                    <i>fail fast</i> and return a promise with a rejection reason being why that one promise failed.
+                </p>
+                <pre><code class="language-javascript">const myPromises = Promise.all([ myFirstPromise, mySecondPromise, myThirdPromise ]);
+myPromises.then(resolvedValues => {
+    const myFirstPromiseResolvedValue = resolvedValues[0];
+    const mySecondPromiseResolvedValue = resolvedValues[1];
+    const myThirdPromiseResolvedValue = resolvedValues[2];
+    ...
+}).catch(rejectionReason => {
+    console.log(rejectionReason);
+});
+            </code></pre>
+            </article>
+        </section>
+        <section>
+            <h2>Async / Await</h2>
+            <p><strong>async... await</strong> is a new syntax that emerged in <strong>ES8</strong> as another way for
+                handling asynchronous action</p>
+            <article>
+                <h3>The <u>async</u> Keyword</h3>
+                The async keyword is used to write functions that contain asynchronous logic:
+                <pre><code class="language-javascript">async function asyncFunc() { ... } 
+const asyncFunc2 = async () => { ... }</code></pre>
+                <p><strong>async</strong> functions always return a promise. It returns in one of three ways:</p>
+                <ul>
+                    <li>If there's nothing returned from the function, it will return a promise with a resolved value of
+                        <strong>undefined</strong>.
+                    </li>
+                    <li>If there's a non-promise value returned from the function, it will return a promise resolved to
+                        that
+                        value.</li>
+                    <li>If a promise is returned from the function, it will simply return that promise</li>
+                </ul>
+                <p>This also means that we can use normal promise syntax like <strong>.then</strong> and
+                    <strong>.catch</strong> on functions that have the <strong>async</strong> keyword.
+                </p>
+                <pre><code class="language-javascript">const myFunc = async () => { return 5; }
+myFunc.then(res => console.log(res)) // prints 5;</code></pre>
+            </article>
+            <article>
+                <h3>The <u>await</u> Operator</h3>
+                <p><strong>await</strong> is used in async functions. It is an <strong>operator</strong> that returns
+                    the resolved value of a promise. <strong>await</strong> halts the execution of the async function
+                    until the promise that it is used on has been fulfilled.</p>
+                <pre><code class="language-javascript">const myFunc = async () => {
+const res = await myPromise();
+console.log(res);
+}</code></pre>
+                <p><strong>async...await</strong> is great because, while everything it does can be achieved with the
+                    <strong>.then</strong> method, it is much cleaner and helps developers maintain and debug code.
+                </p>
+            </article>
+            <article>
+                <h3>Handling Erros</h3>
+                <p>Use <strong>try...catch</strong> blocks in async functions to catch any errors/promise rejections.
+                </p>
+                <pre><code class="language-javascript">const myFunc = async () => {
+    try {
+        const res = await myPromise();
+        console.log(res);
+    } catch (err) {
+        console.log(err)
+    }
+}
+myFunc();</code></pre>
+                <p>Alternatively, use <strong>.catch()</strong> after calling the async function. This is sometimes used
+                    in the global scope to catch final errors in complex code.</p>
+                <pre><code class="language-javascript">const myFunc = async () => {
+    const res = await myPromise();
+    console.log(res);
+}
+myFunc().catch(err => {
+    console.log(err);
+});</code></pre>
+            </article>
         </section>
         <script src="./resources/prismjs/prism.js"></script>
     </main>
