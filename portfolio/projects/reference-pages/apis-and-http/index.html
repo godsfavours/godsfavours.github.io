@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web APIs & HTTP Reference</title>
     <link rel="stylesheet" href="../../../index.css">
+    <link rel="stylesheet" href="./resources/prismjs/prism.css">
 </head>
 
 <body>
@@ -21,20 +22,122 @@
         <h1>Web APIs & HTTP</h1>
     </header>
     <main>
-        <h2>What is HTTP?</h2>
-        <p><strong>HTTP</strong> stands for Hypertext Transfer Protocol, and is used to structure requests and responses
-            over the internet. <strong>HTTP</strong> requires that data is transferred from one point to another over
-            the network.</p>
-        <h2>What is TCP?</h2>
-        <p><strong>TCP</strong> (Transmission Control Protocol) is what actually handles the transfer of data. TCP is
-            used to manage many types of internet connections in which one computer wants to send data to another.</p>
-        <h2>How it all works together</h2>
-        <p>When you type an address into the browser to load a webpage, you command <strong>TCP</strong> to open a
-            connection between your
-            browser (the client) and the server to which the url relates to. Once the TCP connection is established, the
-            client sends a <strong>HTTP <i>GET</i></strong> request to
-            request the webpage. With HTTP/1.0 (the first version of HTTP), once the browser sends back a response,
-            the <strong>TCP</strong> connection is closed.</p>
+        <article>
+            <h2>What is HTTP?</h2>
+            <p><strong>HTTP</strong> stands for Hypertext Transfer Protocol, and is used to structure requests and
+                responses
+                over the internet. <strong>HTTP</strong> requires that data is transferred from one point to another
+                over
+                the network.</p>
+        </article>
+        <article>
+            <h2>What is TCP?</h2>
+            <p><strong>TCP</strong> (Transmission Control Protocol) is what actually handles the transfer of data. TCP
+                is
+                used to manage many types of internet connections in which one computer wants to send data to another.
+            </p>
+        </article>
+        <article>
+            <h2>How do HTTP and TCP work together?</h2>
+            <p>When you type an address into the browser to load a webpage, you command <strong>TCP</strong> to open a
+                connection between your
+                browser (the client) and the server to which the url relates to. Once the TCP connection is established,
+                the
+                client sends a <strong>HTTP <i>GET</i></strong> request to
+                request the webpage. With HTTP/1.0 (the first version of HTTP), once the browser sends back a response,
+                the <strong>TCP</strong> connection is closed.</p>
+        </article>
+        <section>
+            <article>
+                <h2>What are APIs?</h2>
+                <p>An <strong>Application Programming Interface (API)</strong> is a software tool that makes it easier
+                    for
+                    developers to interact with another application to use some of that application's functionality.</p>
+            </article>
+            <article>
+                <h3>Types of Web APIs</h3>
+                <article>
+                    <h4>Browser APIs</h4>
+                    <p><strong>Browser APIs</strong> are specific to writing code that interacts with the browser. See
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API" target="_blank">MDN's documentation
+                            of web (browser)
+                            APIs</a>
+                    </p>
+                </article>
+                <article>
+                    <h4>3rd Part APIs</h4>
+                    <p>These are APIs provided by third parties, usually companies. Organizations that maintain
+                        third-party APIs often set their own rules and requirements for how users utilize their API.</p>
+                </article>
+            </article>
+        </section>
+        <section>
+            <h2>What is REST?</h2>
+            <p>REST, or REpresentational State Transfer, is an architectural style for providing standards between
+                computer systems on the web, making it easier for systems to communicate with each other. REST-compliant
+                systems, often called RESTful systems, are characterized by how they are stateless and separate the
+                concerns of client and server.</p>
+            <h3>Separation of Client and Server</h3>
+            <p>In the REST architectural style, the implementation of the client and the implementation of the server
+                can be done independently without each knowing about the other. This means that the code on the client
+                side can be changed at any time without affecting the operation of the server, and the code on the
+                server side can be changed without affecting the operation of the client. As long as each side knows
+                what format of messages to send to the other, they can be kept modular and separate. Separating the user
+                interface concerns from the data storage concerns, we improve the flexibility of the interface across
+                platforms and improve scalability by simplifying the server components. Additionally, the separation
+                allows each component the ability to evolve independently.</p>
+            <h3>Statelessness</h3>
+            <p>Systems that follow the REST paradigm are stateless, meaning that the server does not need to know
+                anything about what state the client is in and vice versa. In this way, both the server and the client
+                can understand any message received, even without seeing previous messages. This constraint of
+                statelessness is enforced through the use of <strong>resources</strong>, rather than
+                <strong>commands</strong>. Resources are the nouns of
+                the Web - they describe any object, document, or thing that you may need to store or send to other
+                services.
+            </p>
+            <h3>Communication between Client and Server</h3>
+            <p>In <strong>REST</strong> architecture, clients send requests to retrieve or modify resources, and
+                serverse respond to those requests.</p>
+            <h3>Making Requests</h3>
+            <p>REST requires that the client makes requests to retrieve or modify a resource. This request will include:
+            </p>
+            <ul>
+                <li>An HTTP verb, which defines the operation to perform.</li>
+                <li>A <i>header</i>, which allows the client to pass along information about the request</li>
+                <li>A path to the resource</li>
+                <li>An optional <i>body</i> containing data</li>
+            </ul>
+            <h4>HTTP Verbs</h4>
+            <p>There are 4 basic HTTP verbs in a REST system:</p>
+            <ul>
+                <li>GET - retrieve a specific resource by id (or a collection of resources)</li>
+                <li>POST - create a new resource</li>
+                <li>PUT - update a resource</li>
+                <li>DELETE - delete a resource</li>
+            </ul>
+            <h4>Headers and Accept parameters</h4>
+            <p>In the header of the request, the client specifies the type of content that it can receive. This is
+                called the <strong>Accept</strong> field. The values provided in the accept field are <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types"
+                    target="_blank">MIME types</a> (or Multipurpose Internet Mail Extensions). MIME types consist of a
+                <strong>type</strong> and a <strong>subtype</strong>. <strong>text/html</strong> and
+                <strong>image/png</strong> are examples of MIME types.
+            </p>
+            <p>Below is an example request for a resource with id <i>5</i> in a <i>cars</i> resource on a server:</p>
+            <pre><code class="language-http">GET /cars/5
+Accept: text/json text/html</code></pre>
+            <h4>Paths</h4>
+            <p>Paths are required in a request, and they indicate where to find the requested resource. In the example
+                request above, the path is <strong>/cars/5</strong></p>
+            <h3>Sending Responses</h3>
+            <p>When sending a response back to the client, the server must include a <strong>content-type</strong> in
+                the <strong>header</strong> of the response. These content-types are also MIME Types, and they tell the
+                client what type of content to expect. The server must also include a response code to let the user know
+                of the outcome.</p>
+            <pre><code class="language-http">Status Code: 200 (OK)
+Content-type: application/json</code></pre>
+        </section>
+        <script src="./resources/prismjs/prism.js"></script>
     </main>
 </body>
 
