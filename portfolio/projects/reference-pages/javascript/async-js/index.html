@@ -8,7 +8,7 @@
     <title>Asynchronous JavaScript</title>
     <link rel="stylesheet" href="./resources/css/index.css">
     <link rel="stylesheet" href="../../../../index.css">
-    <link rel="stylesheet" href="../resources/prismjs/prism.css">
+    <link rel="stylesheet" href="./resources/prismjs/prism.css">
 </head>
 
 <body>
@@ -24,8 +24,124 @@
         <h1>Asynchronous JavaScript</h1>
     </header>
     <main>
+        <section>
+            <h2>Event Loop</h2>
+            <p>JavaScript is <strong>single threaded</strong>, but uses the <strong>event loop</strong> to carry out
+                async tasks.</p>
+            <h3>Useful links</h3>
+            <ul>
+                <li><a href="https://www.javascripttutorial.net/javascript-event-loop/">javascripttutorial</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop">MDN</a></li>
+            </ul>
+            <p>Very high level explanation of the event loop:</p>
+            <ol>
+                <li>The call stack executes functions in order</li>
+                <li>The Web API pushes callback functions onto the callback (or message) queue. For example, if
+                    <strong>setTimeout</strong> is called, the web API sets a timer for when it will enqueue the
+                    callback onto the <strong>message queue</strong> (they are stored on the heap).
+                </li>
+                <li>When the call stack is empty, the event loop will dequeue an element from the callback queue and
+                    push it onto the stack to execute.</li>
+            </ol>
+            <figure>
+                <img src="./resources/images/javascript-event-loop-step-1.png"
+                    alt="diagram that describes the JavaScript event loop">
+                <figcaption><a href="https://www.javascripttutorial.net/javascript-event-loop/">source</a></figcaption>
+            </figure>
+        </section>
+        <section>
+            <h2>Promises</h2>
+            <p>Promises are objects that represent the eventual outcome of an asynchronous operation. A Promise object
+                can be in one of three states:</p>
+            <ul>
+                <li><strong>Pending</strong>: The initial state— the operation has not completed yet.</li>
+                <li><strong>Fulfilled</strong>: The operation has completed successfully and the promise now has a
+                    resolved value. For
+                    example, a request's promise might resolve with a JSON object as its value.</li>
+                <li><strong>Rejected</strong>: The operation has failed and the promise has a reason for the failure.
+                    This reason is
+                    usually an Error of some kind.</li>
+            </ul>
+            <h3>Constructing a Promise</h3>
+            <p>Below is how to create a new promise:</p>
+            <pre><code class="language-javascript">const executorFunction = (resolve, reject) => {
+    if (someCondition) {
+        resolve('I resolved!');
+    } else {
+        reject('I rejected!'); 
+    }
+}
+const myFirstPromise = new Promise(executorFunction);</code></pre>
+            <ul>
+                <li><strong>resolve</strong> is a function with one argument. Under the hood, if invoked, resolve() will
+                    change the promise's
+                    status from pending to fulfilled, and the promise's resolved value will be set to the argument
+                    passed
+                    into resolve().</li>
+                <li><strong>reject</strong> is a function that takes a reason or error as an argument. Under the hood,
+                    if invoked, reject()
+                    will change the promise's status from pending to rejected, and the promises rejection reason will
+                    be
+                    set to the argument passed into reject().</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Consuming Promises</h2>
+            <p>When a promise is no longer pending, we can handle the outcome using the <strong>.then</strong> method on
+                the promise.</p>
+            <pre><code class="language-javascript">myFirstPromise.then(onFulfilled, onRejected);</code></pre>
+            <p><strong>onFulfilled</strong> is the success handler function, which contains logic for handling a
+                successful promise. <strong>onRejected</strong> serves the opposite purpose.
+                <strong>onFulfilled</strong> takes as
+                argument what is passed into <strong>resolve</strong> in the promise, and vise-versa
+            </p>
+            <pre><code class="language-javascript">const onFulfilled = res => {
+    // do something with res
+}
 
-        <script src="../resources/prismjs/prism.js"></script>
+const onRejected = rejectionReason => {
+    ...
+}
+            </code></pre>
+            <p><strong>.then()</strong> will return a promise with the same settled value as the promise it was called
+                on if no appropriate handler was provided. This means that if the promise succeeds but no success
+                handler was provided, <strong>.then()</strong> will just return a promise with the same settled results
+                as the original promise.
+                The same goes if no failure handler is provided.
+            </p>
+            <p>To write cleaner code and achieve <i>separation of concerns</i>, it is common to only include the success
+                handler in the <strong>.then()</strong> method, and then chain a <strong>.catch()</strong> call:</p>
+            <pre><code class="language-javascript">myFirstPromise.then((res) => {
+    // onFulfilled function
+    ...
+}).catch((error) => {
+    // onRejected function
+};)
+            </code></pre>
+            <p><strong>.catch()</strong> is equivalent to a <strong>.then()</strong> call without the success callback
+                provided:</p>
+            <pre><code class="language-javascript">myFirstPromise.then((res) => {
+    // onFulfilled function
+    ...
+}).then(null, (error) => {
+    // onRejected function
+};)</code></pre>
+            <h2>Chaining Promises</h2>
+            <p>It's not uncommon to have to perform a sequence of asynchronous tasks, each depending on the one before
+                it. We can do this by chaining promises together, a process called <i>composition</i>. An example of
+                promise composition is shown below:</p>
+            <pre><code>myFirstPromise.then((firstPromiseResolvedValue) => {
+    return mySecondPromise(secondPromisesolvedValue);
+}).then((secondPromiseResolvedValue) => {
+    return myThirdPromise(secondPromisesolvedValue);
+}).then(((thirdPromiseResolvedValue) => {
+    console.log(thirdPromiseResolvedValue);
+}));
+            </code></pre>
+            <p>note that the <strong>return</strong> statement is necessary to pass the next promise through the chain,
+                otherwise the default return value is used.</p>
+        </section>
+        <script src="./resources/prismjs/prism.js"></script>
     </main>
 
 </body>
