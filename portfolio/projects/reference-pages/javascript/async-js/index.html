@@ -33,15 +33,19 @@
                 <li><a href="https://www.javascripttutorial.net/javascript-event-loop/">javascripttutorial</a></li>
                 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop">MDN</a></li>
             </ul>
-            <p>Very high level explanation of the event loop:</p>
+            <p>When a program is run, function calls are made and added to a stack. The functions that make requests
+                that need to wait for servers to respond then get sent to a separate queue. Once the stack has cleared,
+                then the functions in the queue are executed. Very high level explanation of the event loop:</p>
             <ol>
                 <li>The call stack executes functions in order</li>
-                <li>The Web API pushes callback functions onto the callback (or message) queue. For example, if
+                <li>When a function performs some async task that it needs to wait for, the Web API removes that
+                    function
+                    from the stack and adds it to the callback (or message) queue. For example, if
                     <strong>setTimeout</strong> is called, the web API sets a timer for when it will enqueue the
                     callback onto the <strong>message queue</strong> (they are stored on the heap).
                 </li>
-                <li>When the call stack is empty, the event loop will dequeue an element from the callback queue and
-                    push it onto the stack to execute.</li>
+                <li>When the call stack is empty, the event loop will dequeue that function from the callback queue and
+                    push it back onto the stack to execute.</li>
             </ol>
             <figure>
                 <img src="./resources/images/javascript-event-loop-step-1.png"
