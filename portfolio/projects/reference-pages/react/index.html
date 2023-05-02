@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Reference</title>
+    <link rel="stylesheet" href="../../../index.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="breadcrumb">
+                <li><a href="../../../">Home</a></li>
+                <li><a href="../">Reference Pages</a></li>
+                <li><a href="#">React</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>React</h1>
+        <section>
+            <ul>
+                <li><a href="./jsx/">JSX</a></li>
+            </ul>
+        </section>
+        <section>
+            <h2>The Virtual DOM</h2>
+            <p>The react <strong>Virtual DOM</strong> serves to solve inneficiency issues when it comes to
+                manipulating
+                the DOM.
+                Normally, when a DOM node/element is updated, the browser re-renders the entire DOM. This is because
+                it
+                is very costly to figure out exactly where a change occurred, so it is must easier to just re-render
+                everything. This is very
+                costly, especially if there are lots of DOM manipulations going on. The <strong>Virtual
+                    DOM</strong>,
+                which is a JavaScript object stored in main memory (virtual), is a representation of the regular
+                DOM.
+                For every DOM object, there is a corresponsing "virtual DOM object."</p>
+            <p>A virtual DOM object has the same properties as a real DOM object, but it lacks the real thing's
+                power to
+                directly change what's on the screen. Manipulating the DOM is slow. Manipulating the virtual DOM is
+                much
+                faster because nothing gets drawn
+                onscreen. Think of manipulating the virtual DOM as editing a blueprint, as opposed to moving rooms
+                in an
+                actual house.</p>
+            <h3>How the Virtual DOM worls</h3>
+            <p>When an virtual DOM object is changed, the entire Virtual DOM is updated. This is not inefficient
+                because
+                the virtual DOM can update very quickly. Once the virtual DOM has been updated, React compares the
+                current virtual DOM to a snapshot of a previous version (<strong>diffing</strong>). This allows
+                React to
+                figure out exactly which
+                virtual DOM object changed, and thus to update only that object in the real dom.</p>
+            <h2>Why React</h2>
+            <p>React.js is a JavaScript library developed by engineers at Facebook. It is fast, modular, scalable,
+                and
+                flexible.</p>
+    </main>
+</body>
+
+</html>

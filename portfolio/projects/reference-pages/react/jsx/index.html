@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX Reference</title>
+    <link rel="stylesheet" href="../../../../index.css">
+    <link rel="stylesheet" href="./resources/prismjs/prism.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="breadcrumb">
+                <li><a href="../../../../">Home</a></li>
+                <li><a href="../../">Reference Pages</a></li>
+                <li><a href="../">React</a></li>
+                <li><a href="#">JSX</a></li>
+            </ul>
+        </nav>
+        <h1>JSX</h1>
+    </header>
+    <main>
+        <p><strong>JSX</strong> is a syntax extension for JavaScript, designed to by used with React. Web
+            browsers
+            won't understand JSX code, rather a JSX compiler would be needed to translate JSX into regular
+            JavaScript.</p>
+        <h2>JSX elements</h2>
+        <p>A JSX element looks exactly like a HTML element:</p>
+        <pre><code class="language-jsx">&lth1&gtHello World&lt/h1&gt</code></pre>
+        <p>JSX are treated as JavaScript <i>expressions</i>, so they can go anywhere that JS experssions can go.
+        </p>
+        <pre><code class="language-jsx">const familyMembers = {
+    father: &ltp&gtPeter&lt/p&gt,
+    mother: &ltp&gtLois&lt/p&gt,
+    ...
+} </code></pre>
+        <h2>Nested JSX</h2>
+        <p>You can nest JSX elements inside other JSX elements. If a JSX expression takes up more that one line,
+            wrap it in parentheses.</p>
+        <pre><code class="language-jsx">const div = (
+    &ltdiv&gt
+        &ltdiv&gt
+            &ltp&gtHello World&lt/p&gt
+        &lt/div&gt
+    &lt/div&gt
+);</code></pre>
+        <h2>JSX Outer Elements</h2>
+        <p>A JSX expression must have exactly <strong>one</strong> outermost element. This is fine:</p>
+        <pre><code class="language-jsx">const div = (
+    &ltdiv&gt
+        &ltdiv&gt
+            &ltp&gtHello World&lt/p&gt
+        &lt/div&gt
+    &lt/div&gt
+);</code></pre>
+        <p>But this is not fine:</p>
+        <pre><code class="language-jsx">const div = (
+    &ltdiv&gt
+        &ltdiv&gt
+            &ltp&gtHello World&lt/p&gt
+        &lt/div&gt
+    &lt/div&gt
+    &ltdiv&gt
+        &ltp&gtHowdy&lt/p&gt
+    &lt/div&gt
+);</code></pre>
+        <h3>Rendering JSX</h3>
+        <pre><code class="language-jsx">import React from 'react';
+import { createRoot } from 'react-dom/client';
+
+const container = document.getElementById('app');
+const root = createRoot(container);
+root.render(&lth1&gtHello world&lt/h1&gt);</code></pre>
+        <p><strong>createRoot</strong> lets you create a root to display React components inside a browser DOM
+            node. It tells you where you want to place the content that is being rendered. The
+            <strong>render()</strong> method only updates DOM elements that have changed. If you render the
+            exact same thing twice in a row, nothing will happen.
+        </p>
+        </section>
+    </main>
+
+    <script src="./resources/prismjs/prism.js"></script>
+
+</body>
+
+</html>
